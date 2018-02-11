@@ -2,6 +2,7 @@ import {
   GraphQLList,
   GraphQLInt,
 } from 'graphql';
+import moment from 'moment';
 import { random, date, address } from 'faker';
 import { resolver } from 'graphql-sequelize';
 import models from '../../../../../models'
@@ -12,7 +13,7 @@ import {
   PredictionsType,
 } from './types';
 
-console.log(models);
+let currentDate = 0;
 
 const Queries = {
   vehicles: {
@@ -37,9 +38,20 @@ const Queries = {
     resolve: resolver(models.vehicleEvent),
   },
   predictions: {
-    ype: new GraphQLList(PredictionsType),
-    resolve: resolver(models.predictions),
-  }
+    type: new GraphQLList(PredictionsType),
+    resolve: () => models.predictions.findAll()
+      .then(data => {
+        const returnable = data.map(vals => {
+          const newObj = {};
+          Object.keys(vals.dataValues).forEach(key => {
+            newObj[key] = vals.dataValues[key];
+          })
+          newObj.summation = '40.18';
+          return newObj;
+        })
+        return returnable;
+      })
+  },
 };
 
 export {

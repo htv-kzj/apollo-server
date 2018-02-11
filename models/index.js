@@ -32,7 +32,6 @@ Object.keys(db).forEach(function(modelName) {
 
 // db.vehicleEvent.belongsTo(db.vehicle, { as: 'events', foreignKey: 'vehicleid' });
 db.vehicle.hasMany(db.vehicleEvent, { as: 'events', foreignKey: 'vehicleid' })
-console.log(db.vehicle);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
