@@ -21,7 +21,7 @@ module.exports = function(sequelize, Sequelize)
     eventtypeid: Sequelize.INTEGER,
     streetspeed: Sequelize.INTEGER,
     location: Sequelize.STRING(60),
-    distance: Sequelize.FLOAT(8),
+    distance: Sequelize.FLOAT(17),
   },{
     tableName: 'vehicleevent',
     timestamps: false,
