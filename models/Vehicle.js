@@ -6,6 +6,7 @@ module.exports = function(sequelize, Sequelize)
       primaryKey: true,
     },
     createdatetime: Sequelize.STRING,
+    lastupdatedatetime: Sequelize.STRING,
     lastknowneventid: Sequelize.INTEGER,
     displayname: Sequelize.INTEGER,
   }, {
