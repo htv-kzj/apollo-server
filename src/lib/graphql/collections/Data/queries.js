@@ -13,8 +13,6 @@ import {
 } from './types';
 import Promise from 'bluebird';
 
-console.log(models);
-
 const Queries = {
   vehicles: {
     type: new GraphQLList(VehicleType),
@@ -36,7 +34,8 @@ const Queries = {
       if (vehicle.events.length) {
         vehicle.lastknowndata[0].longitude = vehicle.events[0].longitude;
         vehicle.lastknowndata[0].latitude = vehicle.events[0].latitude;
-        if (vehicle.events[0].vehicleeventid === vehicle.lastknowneventid) {
+        if (vehicle.events[0].vehicleeventid == vehicle.lastknowneventid) {
+          console.log('Vehicle Events EventTypeId:', vehicle.events[0].eventtypeid)
           switch (vehicle.events[0].eventtypeid) {
             case 1:
               vehicle.lastknowndata[0].status = 'GPS Location';
