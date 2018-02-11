@@ -2,7 +2,7 @@ module.exports = function(sequelize, Sequelize)
 {
   return sequelize.define('predictions', {
     original_time: {
-      type: Sequelize.String(60),
+      type: Sequelize.STRING(60),
       primaryKey: true,
     },
     predicted_time: Sequelize.STRING(60),

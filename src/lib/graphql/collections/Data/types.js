@@ -90,7 +90,7 @@ const VehicleEventType = new GraphQLObjectType({
 });
 
 const PredictionsType = new GraphQLObjectType({
-  name: 'PredictionsType'.
+  name: 'PredictionsType',
   description: 'prediction type definition',
   fields: () => ({
     original_time: {
@@ -100,7 +100,7 @@ const PredictionsType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
     },
     difference: {
-      type; new GraphQLNonNull(GraphQLString),
+      type: new GraphQLNonNull(GraphQLString),
     },
   })
 })

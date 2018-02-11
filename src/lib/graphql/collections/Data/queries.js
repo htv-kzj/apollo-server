@@ -61,7 +61,7 @@ const Queries = {
     },
   },
   predictions: {
-    ype: new GraphQLList(PredictionsType),
+    type: new GraphQLList(PredictionsType),
     resolve: resolver(models.predictions),
   }
 };
