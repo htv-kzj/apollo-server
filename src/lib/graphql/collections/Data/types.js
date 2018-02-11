@@ -24,9 +24,6 @@ const VehicleType = new GraphQLObjectType({
     lastknowneventid: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    lastknownevent: {
-      type: VehicleEventType,
-    },
     displayname: {
       type: new GraphQLNonNull(GraphQLInt),
     },
