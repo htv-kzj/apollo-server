@@ -30,8 +30,27 @@ const VehicleType = new GraphQLObjectType({
     events: {
       type: new GraphQLList(VehicleEventType),
     },
+    lastknowndata: {
+      type: new GraphQLList(LastKnownData),
+    },
   }),
 });
+
+const LastKnownData = new GraphQLObjectType({
+  name: 'LastKnownData',
+  description: 'Last Known Positional Data',
+  fields: () => ({
+    longitude: {
+      type: new GraphQLNonNull(GraphQLFloat),
+    },
+    latitude: {
+      type: new GraphQLNonNull(GraphQLFloat),
+    },
+    status: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
+  })
+})
 
 const EventType = new GraphQLObjectType({
   name: 'EventType',

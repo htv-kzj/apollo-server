@@ -11,6 +11,7 @@ import {
   VehicleEventType,
   PredictionsType,
 } from './types';
+import Promise from 'bluebird';
 
 console.log(models);
 
@@ -29,7 +30,36 @@ const Queries = {
       order: [
         [{ model: models.vehicleEvent, as: 'events' }, 'endtime', 'desc'],
       ]
-    }),
+    }).then((vehicles) => Promise.map(vehicles, (vehicle) => {
+      vehicle.lastknowndata = [];
+      vehicle.lastknowndata[0] = {};
+      if (vehicle.events.length) {
+        vehicle.lastknowndata[0].longitude = vehicle.events[0].longitude;
+        vehicle.lastknowndata[0].latitude = vehicle.events[0].latitude;
+        if (vehicle.events[0].vehicleeventid === vehicle.lastknowneventid) {
+          switch (vehicle.events[0].eventtypeid) {
+            case 1:
+              vehicle.lastknowndata[0].status = 'GPS Location';
+              break;
+            case 90:
+              vehicle.lastknowndata[0].status = 'Power On';
+              break;
+            case 91:
+              vehicle.lastknowndata[0].status = 'Power Off';
+              break;
+            case 92:
+              vehicle.lastknowndata[0].status = 'Motion Stop';
+              break;
+            default:
+              vehicle.lastknowndata[0].status = 'Unknown';
+              break;
+          }
+          return vehicle;
+        }
+        vehicle.lastknowndata[0].status = 'Unknown';
+      }
+      return vehicle;
+    })),
   },
   events: {
     type: new GraphQLList(EventType),
@@ -37,28 +67,12 @@ const Queries = {
   },
   vehicleEvents: {
     type: new GraphQLList(VehicleEventType),
-    resolve: (source, args) => {
-      let limit = 9999;
-      if (args.limit) {
-        limit = args.limit;
-        delete args.limit;
-      }
-      if (args.order) {
-        const order = args.order;
-        delete args.order;
-        return models.vehicleEvent.findAll({
-          where: args,
-          order: [
-            [endtime, order],
-          ],
-          limit: limit,
-        });
-      }
-      return models.vehicleEvent.findAll({
-        where: args,
-        limit: limit,
-      });
-    },
+    resolve: (source, args) => models.vehicleEvent.findAll({
+      where: args,
+      order: [
+        [endtime, order],
+      ],
+    }),
   },
   predictions: {
     type: new GraphQLList(PredictionsType),
