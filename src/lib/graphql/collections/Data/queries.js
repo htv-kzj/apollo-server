@@ -1,5 +1,6 @@
 import {
   GraphQLList,
+  GraphQLInt,
 } from 'graphql';
 import { random, date, address } from 'faker';
 import { resolver } from 'graphql-sequelize';
@@ -15,7 +16,16 @@ console.log(models);
 const Queries = {
   vehicles: {
     type: new GraphQLList(VehicleType),
-    resolve: resolver(models.vehicle),
+    args: {
+      vehicleid: { type: GraphQLInt },
+    },
+    resolve: (source, args) => models.vehicle.findAll({
+      where: args,
+      include: {
+        model: models.vehicleEvent,
+        as: 'events',
+      },
+    }),
   },
   events: {
     type: new GraphQLList(EventType),

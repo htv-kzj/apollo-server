@@ -5,12 +5,18 @@ module.exports = function(sequelize, Sequelize)
       type: Sequelize.STRING(60),
       primaryKey: true,
     },
-    vehicleid: Sequelize.INTEGER,
-    latitude: Sequelize.FLOAT(8),
-    longitude: Sequelize.FLOAT(8),
+    vehicleid: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: sequelize.vehicle,
+        key: 'vehicleid',
+      }
+    },
+    latitude: Sequelize.FLOAT(17),
+    longitude: Sequelize.FLOAT(17),
     starttime: Sequelize.STRING(60),
     endtime: Sequelize.STRING(60),
-    createddatetime: Sequelize.STRING(60),
+    createdatetime: Sequelize.STRING(60),
     heading: Sequelize.FLOAT(4),
     eventtypeid: Sequelize.INTEGER,
     streetspeed: Sequelize.INTEGER,

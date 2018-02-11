@@ -5,6 +5,7 @@ import {
   GraphQLNonNull,
   GraphQLInt,
   GraphQLFloat,
+  GraphQLList,
 } from 'graphql';
 
 const VehicleType = new GraphQLObjectType({
@@ -14,10 +15,10 @@ const VehicleType = new GraphQLObjectType({
     vehicleid: {
       type: new GraphQLNonNull(GraphQLID),
     },
-    creationdate: {
+    createdatetime: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    lastupdatedate: {
+    lastupdatedatetime: {
       type: new GraphQLNonNull(GraphQLString),
     },
     lastknowneventid: {
@@ -25,6 +26,9 @@ const VehicleType = new GraphQLObjectType({
     },
     displayname: {
       type: new GraphQLNonNull(GraphQLInt),
+    },
+    events: {
+      type: new GraphQLList(VehicleEventType),
     },
   }),
 });
@@ -46,17 +50,17 @@ const VehicleEventType = new GraphQLObjectType({
   name: 'VehicleEventType',
   description: 'Vehicle Event Type definition',
   fields: () => ({
-    vehicleeventId: {
-      type: new GraphQLNonNull(GraphQLID),
+    vehicleeventid: {
+      type: new GraphQLNonNull(GraphQLString),
     },
     vehicleid: {
       type: new GraphQLNonNull(GraphQLInt),
     },
     latitude: {
-      type: new GraphQLNonNull(GraphQLInt),
+      type: new GraphQLNonNull(GraphQLFloat),
     },
     longitude: {
-      type: new GraphQLNonNull(GraphQLInt),
+      type: new GraphQLNonNull(GraphQLFloat),
     },
     starttime: {
       type: new GraphQLNonNull(GraphQLString),
@@ -67,7 +71,7 @@ const VehicleEventType = new GraphQLObjectType({
     distance: {
       type: new GraphQLNonNull(GraphQLInt),
     },
-    creationdate: {
+    createdatetime: {
       type: new GraphQLNonNull(GraphQLString),
     },
     heading: {
