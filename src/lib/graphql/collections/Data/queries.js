@@ -9,6 +9,7 @@ import {
   VehicleType,
   EventType,
   VehicleEventType,
+  PredictionsType,
 } from './types';
 
 console.log(models);
@@ -35,6 +36,10 @@ const Queries = {
     type: new GraphQLList(VehicleEventType),
     resolve: resolver(models.vehicleEvent),
   },
+  predictions: {
+    ype: new GraphQLList(PredictionsType),
+    resolve: resolver(models.predictions),
+  }
 };
 
 export {
