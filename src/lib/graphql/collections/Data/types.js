@@ -33,6 +33,9 @@ const VehicleType = new GraphQLObjectType({
     lastknowndata: {
       type: new GraphQLList(LastKnownData),
     },
+    enginehours: {
+      type: new GraphQLNonNull(GraphQLString),
+    }
   }),
 });
 

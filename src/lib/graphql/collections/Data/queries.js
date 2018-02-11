@@ -14,6 +14,26 @@ import {
 } from './types';
 import Promise from 'bluebird';
 
+const calculateEngineHours = (events) => {
+  let seconds = 0;
+  let starttime = moment(events[events.length - 1].endtime);
+  for (let i = (events.length - 1); i >= 0; i--) {
+    if (events[i].eventtypeid == 90) {
+      starttime = moment(events[i].endtime);
+    }
+
+    if (events[i].eventtypeid == 91) {
+      console.log('eventended');
+      const endtime = moment(events[i].endtime);
+      seconds += endtime.diff(starttime, 'milliseconds');
+      starttime = null;
+    }
+  }
+  console.log('seconds', seconds);
+  const duration = moment.duration(seconds, 'm');
+  return `${duration._data.hours}:${duration._data.minutes}`;
+}
+
 const Queries = {
   vehicles: {
     type: new GraphQLList(VehicleType),
@@ -32,10 +52,12 @@ const Queries = {
     }).then((vehicles) => Promise.map(vehicles, (vehicle) => {
       vehicle.lastknowndata = [];
       vehicle.lastknowndata[0] = {};
+      vehicle.enginehours = "00:00";
       if (vehicle.events.length) {
         vehicle.lastknowndata[0].longitude = vehicle.events[0].longitude;
         vehicle.lastknowndata[0].latitude = vehicle.events[0].latitude;
         vehicle.lastknowndata[0].location = vehicle.events[0].location;
+        vehicle.enginehours = calculateEngineHours(vehicle.events);
         if (vehicle.events[0].vehicleeventid == vehicle.lastknowneventid) {
           console.log('Vehicle Events EventTypeId:', vehicle.events[0].eventtypeid)
           switch (vehicle.events[0].eventtypeid) {
