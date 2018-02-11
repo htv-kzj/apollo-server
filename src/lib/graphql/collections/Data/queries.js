@@ -36,7 +36,28 @@ const Queries = {
   },
   vehicleEvents: {
     type: new GraphQLList(VehicleEventType),
-    resolve: resolver(models.vehicleEvent),
+    resolve: (source, args) => {
+      let limit = 9999;
+      if (args.limit) {
+        limit = args.limit;
+        delete args.limit;
+      }
+      if (args.order) {
+        const order = args.order;
+        delete args.order;
+        return models.vehicleEvent.findAll({
+          where: args,
+          order: [
+            [endtime, order],
+          ],
+          limit: limit,
+        });
+      }
+      return models.vehicleEvent.findAll({
+        where: args,
+        limit: limit,
+      });
+    },
   },
 };
 
