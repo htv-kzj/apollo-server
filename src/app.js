@@ -2,9 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import myGraphQLSchema from './lib/graphql';
+import cors from 'cors';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+app.use(cors())
 
 // bodyParser is needed just for POST.
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema: myGraphQLSchema }));
