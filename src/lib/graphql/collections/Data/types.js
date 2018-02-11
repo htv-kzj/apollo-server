@@ -69,7 +69,7 @@ const VehicleEventType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
     },
     distance: {
-      type: new GraphQLNonNull(GraphQLInt),
+      type: new GraphQLNonNull(GraphQLFloat),
     },
     createdatetime: {
       type: new GraphQLNonNull(GraphQLString),
