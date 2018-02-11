@@ -25,6 +25,9 @@ const Queries = {
         model: models.vehicleEvent,
         as: 'events',
       },
+      order: [
+        [{ model: models.vehicleEvent, as: 'events' }, 'endtime', 'desc'],
+      ]
     }),
   },
   events: {
