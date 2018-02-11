@@ -11,19 +11,19 @@ const VehicleType = new GraphQLObjectType({
   name: 'VehicleType',
   description: 'Vehicle type definition',
   fields: () => ({
-    vehicleId: {
+    vehicleid: {
       type: new GraphQLNonNull(GraphQLID),
     },
-    creationDate: {
+    creationdate: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    lastUpdateDate: {
+    lastupdatedate: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    lastKnownEventId: {
+    lastknowneventid: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    displayName: {
+    displayname: {
       type: new GraphQLNonNull(GraphQLInt),
     },
   }),
@@ -33,10 +33,10 @@ const EventType = new GraphQLObjectType({
   name: 'EventType',
   description: 'Event Type Definition',
   fields: () => ({
-    eventTypeId: {
+    eventtypeid: {
       type: new GraphQLNonNull(GraphQLID),
     },
-    eventTypeName: {
+    eventtypename: {
       type: new GraphQLNonNull(GraphQLString),
     },
   }),
@@ -46,10 +46,10 @@ const VehicleEventType = new GraphQLObjectType({
   name: 'VehicleEventType',
   description: 'Vehicle Event Type definition',
   fields: () => ({
-    vehicleEventId: {
+    vehicleeventId: {
       type: new GraphQLNonNull(GraphQLID),
     },
-    vehicleId: {
+    vehicleid: {
       type: new GraphQLNonNull(GraphQLInt),
     },
     latitude: {
@@ -58,28 +58,28 @@ const VehicleEventType = new GraphQLObjectType({
     longitude: {
       type: new GraphQLNonNull(GraphQLInt),
     },
-    startTime: {
+    starttime: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    endTime: {
+    endtime: {
       type: new GraphQLNonNull(GraphQLString),
     },
     distance: {
       type: new GraphQLNonNull(GraphQLInt),
     },
-    creationDate: {
+    creationdate: {
       type: new GraphQLNonNull(GraphQLString),
     },
     heading: {
       type: new GraphQLNonNull(GraphQLFloat),
     },
-    eventTypeId: {
+    eventtypeid: {
       type: new GraphQLNonNull(GraphQLInt),
     },
     location: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    streetSpeed: {
+    streetspeed: {
       type: new GraphQLNonNull(GraphQLInt),
     },
   }),
