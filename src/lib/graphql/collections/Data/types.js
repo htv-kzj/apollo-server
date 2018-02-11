@@ -49,6 +49,9 @@ const LastKnownData = new GraphQLObjectType({
     status: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    location: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
   })
 })
 

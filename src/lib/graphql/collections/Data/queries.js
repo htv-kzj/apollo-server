@@ -34,6 +34,7 @@ const Queries = {
       if (vehicle.events.length) {
         vehicle.lastknowndata[0].longitude = vehicle.events[0].longitude;
         vehicle.lastknowndata[0].latitude = vehicle.events[0].latitude;
+        vehicle.lastknowndata[0].location = vehicle.events[0].location;
         if (vehicle.events[0].vehicleeventid == vehicle.lastknowneventid) {
           console.log('Vehicle Events EventTypeId:', vehicle.events[0].eventtypeid)
           switch (vehicle.events[0].eventtypeid) {
