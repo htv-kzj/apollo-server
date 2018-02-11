@@ -14,4 +14,5 @@ app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' })); // if you wa
 app.get('/', (req, res) => res.sendStatus(200));
 app.get('/health', (r, res) => res.sendStatus(200));
 
+console.log('App Listening on ', PORT);
 app.listen(PORT);
